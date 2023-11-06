@@ -39,8 +39,8 @@ class Solution {
         
         int cnt = 0; // max거리와 같은 노드의 개수
         int max = 0; 
-        
-        while(!q.isEmpty()){
+        int vis = 1;
+        bfs : while(!q.isEmpty()){
             node temp = q.poll();
             
             for(int c : list[temp.num]){
@@ -55,6 +55,10 @@ class Solution {
                     } //max와 같다면 cnt더하기
                     else if(max == temp.dis+1){
                         cnt++;
+                    }
+                    vis++;
+                    if(vis==n){
+                        break bfs;
                     }
                 }
             }
