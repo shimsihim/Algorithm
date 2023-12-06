@@ -1,52 +1,44 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
-
-public class Main {
-	
-	public static void main(String[] args) throws IOException {
-		BufferedReader br  = new BufferedReader(new InputStreamReader(System.in));
-		
-		StringTokenizer st;
-		
-		int n = Integer.parseInt(br.readLine());
-		
-		int list[] = new int[n+1];
-		st = new StringTokenizer(br.readLine());
-		for(int i = 1 ; i <= n ; ++i) {
-			list[i] = Integer.parseInt(st.nextToken());
-			
-		}
-		int start = Integer.parseInt(br.readLine());
-		
-		boolean visit[] = new boolean[n+1];
-		visit[start] = true;
-		
-		Queue<Integer> q = new LinkedList<Integer>();
-		q.add(start);
-		int cnt = 1;
-		while(!q.isEmpty()) {
-			if(cnt==n) break;
-			int temp = q.poll();
-			int left = temp-list[temp];
-			int right = temp+list[temp];
-			
-			if(left>=1 && !visit[left]) {
-				q.add(left);
-				visit[left] = true;
-				cnt++;
-			}
-			if(right<=n && !visit[right]) {
-				q.add(right);
-				visit[right] = true;
-				cnt++;
-			}
-			
-		}
-		System.out.println(cnt);
-	}
-
+import java.util.*;
+import java.io.*;
+class Main {
+    
+    static int[] list;
+    static boolean visit[];
+    static int cnt;
+    static int n;
+    
+    public static void main(String args[]) throws Exception{
+        
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+ 
+        n = Integer.parseInt(br.readLine());
+        list = new int[n+1];
+        visit = new boolean[n+1];
+        cnt = 0;
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for(int  i= 1 ; i < n+1 ; ++i){
+            list[i] = Integer.parseInt(st.nextToken());
+        }
+        int start = Integer.parseInt(br.readLine());
+        
+        dfs(start);
+        System.out.println(cnt);
+        
+    }
+    
+    static void dfs(int num){
+        if(visit[num]){
+            return;
+        }
+        visit[num] = true;
+        cnt++;
+        
+        if(num-list[num]>=1){
+            dfs(num-list[num]);
+        }
+        
+        if(num+list[num]<=n){
+            dfs(num+list[num]);
+        }
+    }
 }
