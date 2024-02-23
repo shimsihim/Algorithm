@@ -20,14 +20,15 @@ class Main {
         list = new int[n];
 
         st = new StringTokenizer(br.readLine());
-        long end = 0;
+        int end = 1000000000;
+        int start = 0;
+
         for (int i = 0; i < n; i++) {
             list[i] = Integer.parseInt(st.nextToken());
-            end += list[i];
+            start = Math.max(list[i],start);
         }
-        long start = end/n;
 
-        long middle =  0;
+        int middle =  0;
 
         while(start<end){
             middle = start + (end-start)/2;
@@ -45,10 +46,10 @@ class Main {
 
     }
 
-    static boolean check(long middle){
+    static boolean check(int middle){
 
         int cnt = 0;
-        long sum = 0;
+        int sum = 0;
 
         for (int i = 0; i < n; i++) {
             if(list[i] > middle) return false;
